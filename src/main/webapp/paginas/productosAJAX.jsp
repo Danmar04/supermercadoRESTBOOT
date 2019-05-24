@@ -194,6 +194,44 @@ function vaciar(){
 }
 
 
+function filtrar(){
+	nombreFiltro = document.getElementById("filtro-nombre").value;
+	precioFiltro = document.getElementById("filtro-precio").value;
+	cantidadFiltro = document.getElementById("filtro-cantidad").value;
+	disponibleFiltro = document.getElementById("filtro-disponible").checked;
+	mercadoFiltro = document.getElementById("filtro-supermercado").value;
+
+	hayFiltroPrevio = false;
+	filtroCompleto = "";
+	if(nombreFiltro!=undefined){
+		filtroCompleto +=(hayFiltroPrevio? "&nombre="+nombreFiltro:"?nombre="+nombreFiltro);
+	}
+	if(precioFiltro!=undefined){
+		filtroCompleto +=(hayFiltroPrevio? "&precio="+precioFiltro:"?precio="+precioFiltro);
+	}
+	if(cantidadFiltro!=undefined){
+		filtroCompleto +=(hayFiltroPrevio? "&cantidad="+cantidadFiltro:"?cantidad="+cantidadFiltro);
+	}
+	if(disponibleFiltro!=undefined){
+		filtroCompleto +=(hayFiltroPrevio? "&disponible="+disponibleFiltro:"?disponible="+disponibleFiltro);
+	}
+	if(mercadoFiltro!=undefined){
+		filtroCompleto +=(hayFiltroPrevio? "&mercado="+mercadoFiltro:"?mercado="+mercadoFiltro);
+	}
+	
+
+	xmlHttp.open("GET","filtrarProductos/"+filtroCompleto,true);
+	xmlHttp.onreadystatechange = function(){
+		if( this.readyState == 4 ){
+			rellenarTabla(JSON.parse(this.responseText));
+			xmlHttp.send(null);
+		}		
+	};
+	xmlHttp.send(null);
+	
+}
+
+
 
 
 </script>
@@ -252,7 +290,16 @@ function vaciar(){
 			</tr>
 		</table>
 		
-		<p align="center"><input type="text" id="filtro"/><input type="button" value="Buscar"  onclick="filtrar()"/></p>
+		<p align="center">
+		<input type="text" id="filtro-nombre" placeholder="Nombre?"/>
+		<input type="text" id="filtro-precio" placeholder="Precio?"/>
+		<input type="text" id="filtro-cantidad" placeholder="Cantidad?"/>
+		<label>¿Disponible?</label>
+		<input type="checkbox" id="filtro-disponible" placeholder="Disponible"/>
+		<input type="text" id="filtro-mercado" placeholder="Supermercado?"/>
+		</p>
+		<p align="center">
+		<input type="button" value="Buscar"  onclick="filtrar()"/></p>
 		<table align="center" width="500px" border="1">
 			<tr>
 				<th>Id</th>
