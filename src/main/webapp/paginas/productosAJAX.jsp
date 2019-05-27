@@ -199,32 +199,32 @@ function filtrar(){
 	precioFiltro = document.getElementById("filtro-precio").value;
 	cantidadFiltro = document.getElementById("filtro-cantidad").value;
 	disponibleFiltro = document.getElementById("filtro-disponible").checked;
-	mercadoFiltro = document.getElementById("filtro-supermercado").value;
+	mercadoFiltro = document.getElementById("filtro-mercado").value;
 
 	hayFiltroPrevio = false;
 	filtroCompleto = "";
-	if(nombreFiltro!=undefined){
+	if(nombreFiltro!=""){
 		filtroCompleto +=(hayFiltroPrevio? "&nombre="+nombreFiltro:"?nombre="+nombreFiltro);
 	}
-	if(precioFiltro!=undefined){
+	if(precioFiltro!=""){
 		filtroCompleto +=(hayFiltroPrevio? "&precio="+precioFiltro:"?precio="+precioFiltro);
 	}
-	if(cantidadFiltro!=undefined){
+	if(cantidadFiltro!=""){
 		filtroCompleto +=(hayFiltroPrevio? "&cantidad="+cantidadFiltro:"?cantidad="+cantidadFiltro);
 	}
-	if(disponibleFiltro!=undefined){
+	if(disponibleFiltro!=""){
 		filtroCompleto +=(hayFiltroPrevio? "&disponible="+disponibleFiltro:"?disponible="+disponibleFiltro);
 	}
-	if(mercadoFiltro!=undefined){
+	if(mercadoFiltro!=""){
 		filtroCompleto +=(hayFiltroPrevio? "&mercado="+mercadoFiltro:"?mercado="+mercadoFiltro);
 	}
 	
 
-	xmlHttp.open("GET","filtrarProductos/"+filtroCompleto,true);
+	xmlHttp.open("GET","filtrarProductos"+filtroCompleto,true);
 	xmlHttp.onreadystatechange = function(){
 		if( this.readyState == 4 ){
 			rellenarTabla(JSON.parse(this.responseText));
-			xmlHttp.send(null);
+			//xmlHttp.send(null);
 		}		
 	};
 	xmlHttp.send(null);

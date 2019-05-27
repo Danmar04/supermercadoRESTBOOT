@@ -63,8 +63,7 @@ public class GestorProducto {
 	
 	public List<Producto> filterProducto(String nombre, Integer cantidad, Double precio, boolean disponible, Integer supermercado){
 		
-		List<Producto> findByCriteria(String nombre1, Double precio1, Integer cantidad1, boolean disponible1, Supermercado supermercado1){
-	        return ProductoCRUDRepositorio.findAll(new Specification<Producto>() {
+	        return productoRepo.findAll(new Specification<Producto>() {
 	            @Override
 	            public javax.persistence.criteria.Predicate toPredicate(Root<Producto> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
 	                List<Predicate> predicates = new ArrayList<>();
@@ -86,7 +85,7 @@ public class GestorProducto {
 	                return criteriaBuilder.and((javax.persistence.criteria.Predicate[]) predicates.toArray(new Predicate[predicates.size()]));
 	            }
 	        });
-		}
+		
 	}
 
 }
