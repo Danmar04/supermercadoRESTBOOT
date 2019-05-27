@@ -201,33 +201,41 @@ function filtrar(){
 	disponibleFiltro = document.getElementById("filtro-disponible").checked;
 	mercadoFiltro = document.getElementById("filtro-mercado").value;
 
+	filtro = {};
+
 	hayFiltroPrevio = false;
 	filtroCompleto = "";
 	if(nombreFiltro!=""){
 		filtroCompleto +=(hayFiltroPrevio? "&nombre="+nombreFiltro:"?nombre="+nombreFiltro);
+		filtro.nombre = nombreFiltro;
 	}
 	if(precioFiltro!=""){
 		filtroCompleto +=(hayFiltroPrevio? "&precio="+precioFiltro:"?precio="+precioFiltro);
+		filtro.precio = precioFiltro;
 	}
 	if(cantidadFiltro!=""){
 		filtroCompleto +=(hayFiltroPrevio? "&cantidad="+cantidadFiltro:"?cantidad="+cantidadFiltro);
+		filtro.cantidad = cantidadFiltro;
 	}
 	if(disponibleFiltro!=""){
 		filtroCompleto +=(hayFiltroPrevio? "&disponible="+disponibleFiltro:"?disponible="+disponibleFiltro);
+		filtro.disponible = disponibleFiltro;
 	}
 	if(mercadoFiltro!=""){
 		filtroCompleto +=(hayFiltroPrevio? "&mercado="+mercadoFiltro:"?mercado="+mercadoFiltro);
+		filtro.supermercado = mercadoFiltro;
 	}
 	
 
-	xmlHttp.open("GET","filtrarProductos"+filtroCompleto,true);
+// 	xmlHttp.open("GET","filtrarProductos"+filtroCompleto,true);
+	xmlHttp.open("POST","filtrarProductos",true);
 	xmlHttp.onreadystatechange = function(){
 		if( this.readyState == 4 ){
 			rellenarTabla(JSON.parse(this.responseText));
 			//xmlHttp.send(null);
 		}		
 	};
-	xmlHttp.send(null);
+	xmlHttp.send(JSON.stringify(filtro));
 	
 }
 

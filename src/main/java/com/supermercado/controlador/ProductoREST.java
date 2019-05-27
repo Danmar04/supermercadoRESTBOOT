@@ -75,11 +75,19 @@ public class ProductoREST {
 		return mav;
 	}
 	
-	@RequestMapping(value="filtrarProdutos/{filtro}",
-			method=RequestMethod.GET,
+//	@RequestMapping(value="filtrarProdutos/{filtro}",
+//			method=RequestMethod.GET,
+//			produces="application/json")
+//	public List<ProductoDTO> filtroBusqueda(@PathVariable("filtro") String filtro){
+//		return productoDelegado.filtrarProductos(filtro);
+//		
+//	}
+	
+	@RequestMapping(value="filtrarProdutos",
+			method=RequestMethod.POST,
 			produces="application/json")
-	public List<ProductoDTO> filtroBusqueda(@PathVariable("filtro") FiltroProductoDTO filtro){
-		return null;
+	public List<ProductoDTO> filtroBusqueda(@RequestBody FiltroProductoDTO filtro){
+		return productoDelegado.filtrarProductos(filtro);
 		
 	}
 }
