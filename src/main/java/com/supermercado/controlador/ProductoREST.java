@@ -19,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.supermercado.delegado.ProductoDelegado;
 import com.supermercado.delegado.SupermercadoDelegado;
+import com.supermercado.dto.FiltroProductoDTO;
 import com.supermercado.dto.ProductoDTO;
 import com.supermercado.dto.SupermercadoDTO;
 import com.supermercado.modelo.Supermercado;
@@ -74,5 +75,11 @@ public class ProductoREST {
 		return mav;
 	}
 	
-
+	@RequestMapping(value="filtrarProdutos/{filtro}",
+			method=RequestMethod.GET,
+			produces="application/json")
+	public List<ProductoDTO> filtroBusqueda(@PathVariable("filtro") FiltroProductoDTO filtro){
+		return null;
+		
+	}
 }

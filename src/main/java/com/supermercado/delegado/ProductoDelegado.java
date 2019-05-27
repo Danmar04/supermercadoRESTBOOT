@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.stereotype.Component;
 
+import com.supermercado.dto.FiltroProductoDTO;
 import com.supermercado.dto.ProductoDTO;
 import com.supermercado.dto.SupermercadoDTO;
 import com.supermercado.modelo.Producto;
@@ -46,6 +47,16 @@ public class ProductoDelegado {
 
 	public ProductoDTO leerProducto(int idProducto) {
 		return this.producto2DTO(productoServ.obtenerProducto(idProducto));
+	}
+	
+	public List<ProductoDTO> filtrarProductos(FiltroProductoDTO filtro){
+		List<Producto> listaProd = productoServ.filterProducto(filtro.getNombre(), filtro.getCantidad(),
+				filtro.getPrecio(), filtro.isDisponible(), filtro.getSupermercado());
+		List<ProductoDTO> listaProdDTO = new ArrayList<ProductoDTO>();
+		for(Producto p : listaProd) {
+			listaProdDTO.add(this.producto2DTO(p));
+		}
+		return listaProdDTO;
 	}
 	
 	private ProductoDTO producto2DTO(Producto producto) {

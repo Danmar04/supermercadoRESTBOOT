@@ -51,4 +51,6 @@ public class GestorSupermercado {
 		supermercado.setListaProductos(listaProducto);
 		
 	}
+
+	
 }

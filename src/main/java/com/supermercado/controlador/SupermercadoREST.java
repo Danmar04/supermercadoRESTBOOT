@@ -20,8 +20,6 @@ public class SupermercadoREST {
 	@Autowired
 	private SupermercadoDelegado supermercadoDelegado;
 
-	@Autowired 
-	private SupermercadoControlador supermercadoMVC;
 
 	@RequestMapping(value="insertarSupermercado",
 			method=RequestMethod.POST,
